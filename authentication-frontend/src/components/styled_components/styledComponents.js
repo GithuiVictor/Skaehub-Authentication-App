@@ -84,14 +84,20 @@ export const Placeholder = styled.p`
 
 export const Image = styled.img`
     width: ${({width}) => (
-        width === "110" ? "110px" : "100%"
+        width === "110" ? "110px" : "100%" &&
+        width === "80" ? "100px" : "100%"
     )};
     height: ${({height}) => (
-        height === "150" ? "150px" : "100%"
+        height === "150" ? "150px" : "100%" &&
+        height === "80" ? "100px" : "100%"
     )};
     object-fit: cover;
     margin: ${({margin}) => (
-        margin === "2-0-2-0" ? "2rem 0rem 2rem 0rem !important" : "0rem 0rem 0rem 0rem"
+        margin === "2-0-2-0" ? "2rem 0rem 2rem 0rem !important" : "0rem 0rem 0rem 0rem" &&
+        margin === "1-0-0-0" ? "1rem 0rem 0rem 0rem !important" : "0rem 0rem 0rem 0rem"
+    )};
+    border-radius: ${({borderRadius}) => (
+        borderRadius ? "50px" : "none"
     )};
 `;
 
@@ -115,6 +121,9 @@ export const Column = styled(Col)`
 
 export const Buttons = styled(Button)`
     width: 100%;
+    margin: ${({margin}) => (
+        margin === "1-0-0-0" ? "1rem 0rem 0rem 0rem" : "0rem 0rem 0rem 0rem"
+    )};
 `;
 
 // export const Buttons = styled.
