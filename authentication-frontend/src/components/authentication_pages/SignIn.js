@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { Card, Container, Image, InputField, Placeholder, Section, Title1, Title4 } from '../styled_components/styledComponents'
+import { Buttons, Card, Column, Container, Image, InputField, Placeholder, Rows, Section, Title1, Title4 } from '../styled_components/styledComponents'
 import { Checkbox, FormControl, FormControlLabel, IconButton, Input, InputLabel, TextField } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
             },
         },
     },
+    textField: {
+        width: '100%',
+    },
 }));
 
 
@@ -50,6 +53,11 @@ function SignIn() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [showPassword, setShowPassword] = useState();
+    const [rememberMe, setRememberMe] = useState(false);
+
+    const handleRememberMe = () => {
+        setRememberMe(!rememberMe)
+    }
 
     return (
         <Section
@@ -62,6 +70,7 @@ function SignIn() {
                 <Card
                     width="375"
                     height="812"
+                    background="linier"
                 >
                     <Container
                         position="absolute"
@@ -71,11 +80,12 @@ function SignIn() {
                         <Image
                             src="https://res.cloudinary.com/emacon-production/image/upload/v1626694192/Victor%20Githui%20Portfolio/victor_githui_white_background_wjx2oa.png"
                             alt="Victor Githui"
-                            width="50"
-                            height="50"
-                            margin="1-0-0-0"
+                            width="110"
+                            height="150"
+                            margin="2-0-2-0"
                         />
                     </Container>
+                    
                     <Container
                         background="#f4f5f7"
                         height="100"
@@ -88,36 +98,72 @@ function SignIn() {
                                 <Title4>Sign in to continue!</Title4>
                             </Container>
                             
+                            {/* Login Form */}
                             <Container margin="1-0-0-0">
-                                <InputField
-                                    className = {classes.root}
-                                    fullWidth
-                                    id = "email"
-                                    label = "Email"
-                                    value = {email}
-                                    onChange = {e => setEmail(e.target.value)}
-                                />
-                                <FormControl className={clsx(classes.margin, classes.textField)}>
-                                    <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                                    <Input
-                                        id="standard-adornment-password"
+                                <form>
+                                   <InputField
+                                        className = {classes.root}
                                         fullWidth
-                                        type={showPassword ? 'text' : 'password'}
-                                        value={password}
-                                        onChange = {(e) => setPassword(e.target.value)}
-                                        endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={() => setShowPassword(true)}
-                                                onMouseDown={() => setShowPassword(false)}
-                                                >
-                                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }
+                                        id = "email"
+                                        label = "Email"
+                                        value = {email}
+                                        onChange = {e => setEmail(e.target.value)}
                                     />
-                                </FormControl>
+                                    <FormControl className={`${clsx(classes.root, classes.textField)} mt-3`}>
+                                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                        <Input
+                                            id="standard-adornment-password"
+                                            fullWidth
+                                            type={showPassword ? 'text' : 'password'}
+                                            value={password}
+                                            onChange = {(e) => setPassword(e.target.value)}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={() => setShowPassword(true)}
+                                                    onMouseDown={() => setShowPassword(false)}
+                                                    >
+                                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                        />
+                                    </FormControl> 
+                                </form>
+                                
+                            </Container>
+
+                            <Container>
+                                <Rows>
+                                    <Column md={6}>
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={rememberMe}
+                                                        onChange={handleRememberMe}
+                                                        name="rememberMe"
+                                                        color="primary"
+                                                    />
+                                                }
+                                                label="Remember Me"
+                                                className="mt-3"
+                                            />
+                                    </Column>
+                                    <Column md={5} display="flex" justifyContent="end">
+                                            <Placeholder>Forgot Password?</Placeholder>
+                                    </Column>
+                                </Rows>
+                            </Container>
+
+                            {/* sign In Btn */}
+                            <Container display="flex">
+                                <Buttons>Sign In</Buttons>
+                            </Container>
+
+                            {/* Create Account Link */}
+                            <Container display="flex" margin="1-0-0-0">
+                                <Placeholder>Don't have an account? Create One</Placeholder>
                             </Container>
                         </Container>
                     </Container>
